@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.mainactivity.auth.DetailsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="12dp"
+        android:paddingLeft="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/imgV"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:src="@drawable/loading"-->
+        <!--            android:maxWidth="350dp"-->
+        <!--            android:maxHeight="350dp"-->
+        <!--            android:adjustViewBounds="true"-->
+        <!--            android:layout_marginTop="10dp"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            />-->
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/imgV"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+        <LinearLayout
+            android:id="@+id/titleBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/imgV">
+            <TextView
+                android:id="@+id/pID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                />
+            <TextView
+                android:id="@+id/pTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Title"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/pCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Category"
+            android:textSize="20dp"
+            android:textStyle="italic"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/titleBox"
+            />
+        <LinearLayout
+            android:id="@+id/priceBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/pCategory"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/priceSign"
+                android:textSize="18dp"
+                android:layout_marginTop="10dp"
+                />
+            <TextView
+                android:id="@+id/pPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="price"
+                android:textSize="18dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="2dp"
+                />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/descriptionTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Description:"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/priceBox"
+            />
+        <TextView
+            android:id="@+id/pDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textSize="17dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/descriptionTV"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/loginBtn"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:text="Add Cart"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/inter_18pt_regular"
+            android:background="@drawable/btndesign"
+            app:layout_constraintTop_toBottomOf="@id/pDescription"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

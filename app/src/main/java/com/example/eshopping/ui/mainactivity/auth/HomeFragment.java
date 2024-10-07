@@ -53,21 +53,35 @@ public class HomeFragment extends Fragment {
         mainViewModel.apiData(); // Fetch Api method
 
         // Observe LiveData
-        mainViewModel.getData().observe(getViewLifecycleOwner(), ApiResponse ->{
-            switch (ApiResponse.getStatus()){
-                case ONLOADING:
-                    binding.progressBar.setVisibility(View.VISIBLE);
-                    break;
-                case ONSUCCESS:
-                    binding.progressBar.setVisibility(View.GONE);
-                    productAdapter = new ProductAdapter(getContext(), ApiResponse.getData());
-                    binding.productRV.setAdapter(productAdapter);
-                    break;
-                case ONERROR:
-                    binding.progressBar.setVisibility(View.GONE);
-                    Toast.makeText(getContext(), "Data Not Found", Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        });
+       mainViewModel.getData.observe(getViewLifecycleOwner(), new Observer<ApiResponse<List<ProductData>>>() {
+           @Override
+           public void onChanged(ApiResponse<List<ProductData>> listApiResponse) {
+               switch (listApiResponse.getStatus()){
+                   case ONLOADING:
+                       binding.progressBar.setVisibility(View.VISIBLE);
+                       break;
+                   case ONSUCCESS:
+                       binding.progressBar.setVisibility(View.GONE);
+                       productAdapter = new ProductAdapter(getContext(), listApiResponse.getData());
+                       binding.productRV.setAdapter(productAdapter);
+                       productAdapter.OnProductListener(new ProductAdapter.OnProductListener() {
+                           @Override
+                           public void onProductClicked(int position) {
+                               // Passing Bundle of DATA Home Fragment to Details Fragment
+                               Bundle bundle = new Bundle();
+                               bundle.putInt("id", position);
+                               DetailsFragment detailsFragment = new DetailsFragment();
+                               detailsFragment.setArguments(bundle);
+                               Utils.loadFragments(fragmentManager, R.id.fragmentContainer, detailsFragment, "details");
+                           }
+                       });
+                       break;
+                   case ONERROR:
+                       binding.progressBar.setVisibility(View.GONE);
+                       Toast.makeText(getContext(), "Data Not Found", Toast.LENGTH_SHORT).show();
+                       break;
+               }
+           }
+       });
     }
 }

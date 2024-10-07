@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.eshopping.data.model.AuthToken;
 import com.example.eshopping.data.model.LoginModel;
 import com.example.eshopping.data.model.ProductData;
+import com.example.eshopping.data.repo.HomeRepo;
 import com.example.eshopping.data.retrofitclient.RetrofitClient;
 import com.example.eshopping.utils.ApiResponse;
 
@@ -21,27 +22,11 @@ import retrofit2.Response;
 
 
 public class MainViewModel extends ViewModel {
-    private MutableLiveData <ApiResponse<List<ProductData>>> productData;
+    HomeRepo homeRepo = new HomeRepo();
+    public LiveData<ApiResponse<List<ProductData>>> getData = homeRepo.getData();
 
-    public LiveData<ApiResponse<List<ProductData>>> getData(){
-        if (productData == null) {
-            productData = new MutableLiveData<>();
-        }
-        return productData;
-    }
     public void apiData(){
-        RetrofitClient.getInstance().getProduct().enqueue(new Callback<List<ProductData>>() {
-            @Override
-            public void onResponse(Call<List<ProductData>> call, Response<List<ProductData>> response) {
-                productData.postValue(ApiResponse.success(response.body()));
-            }
 
-            @Override
-            public void onFailure(Call<List<ProductData>> call, Throwable t) {
-                productData.postValue(ApiResponse.error("Data Not Found"));
-            }
-        });
+        homeRepo.getProducts();
     }
-
-
 }

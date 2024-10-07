@@ -57,20 +57,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         });
 
         // here is the code for carousal item
-//        Handler handler = new Handler();
-//        Runnable runnable = new Runnable() {
-//            @Override
-//            public void run() {
-//                if (holder.imageRV.getCurrentItem()+1<imagesAdapter.getItemCount()){
-//                    holder.imageRV.setCurrentItem(holder.imageRV.getCurrentItem()+1);
-//                }else {
-//                   holder.imageRV.setCurrentItem(0);
-//                }
-//                handler.postDelayed(this, 4000);
-//            }
-//        };
-//        handler.postDelayed(runnable, 4000);
-        // carousal code end here
+        Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (holder.imageRV.getCurrentItem()+1<imagesAdapter.getItemCount()){
+                    holder.imageRV.setCurrentItem(holder.imageRV.getCurrentItem()+1);
+                }else {
+                   holder.imageRV.setCurrentItem(0);
+                }
+                handler.postDelayed(this, 4000);
+            }
+        };
+        handler.postDelayed(runnable, 4000);
+//         carousal code end here
 
     }
 

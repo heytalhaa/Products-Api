@@ -1,20 +1,19 @@
-package com.example.eshopping.ui.mainactivity;
+package com.example.eshopping.ui.mainactivity.adapter;
 
 import android.content.Context;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.bumptech.glide.Glide;
 import com.example.eshopping.R;
 import com.example.eshopping.data.model.ProductData;
+import com.example.eshopping.ui.mainactivity.ImagesAdapter;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
@@ -102,5 +101,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
     }
     public void OnProductListener(OnProductListener onProductListener){
         this.onProductListener = onProductListener;
+    }
+    public void updateByCategory(List<ProductData> list){
+        this.productData = list;
+        notifyDataSetChanged();
     }
 }

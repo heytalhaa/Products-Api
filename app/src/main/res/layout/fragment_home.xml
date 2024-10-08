@@ -8,6 +8,16 @@
     tools:context=".ui.mainactivity.auth.HomeFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/categoryRV"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/categories_items"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productRV"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -15,7 +25,7 @@
         app:spanCount="2"
         android:orientation="vertical"
         tools:listitem="@layout/product_items"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/categoryRV"
         app:layout_constraintBottom_toBottomOf="parent"
         />
     <ProgressBar

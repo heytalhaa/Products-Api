@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 
@@ -49,23 +50,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
-
-        loginViewModel.accesToken.observe(this, new Observer<AuthToken>() {
-            @Override
-            public void onChanged(AuthToken authToken) {
-                Log.d("Loggedin", authToken.getAccessToken());
-
-//                SharedPreferences sharedPreferences = getSharedPreferences("onBoardingPrefs", Context.MODE_PRIVATE);
-//                SharedPreferences.Editor editor = sharedPreferences.edit();
-//                editor.putString("access_token", authToken.getAccessToken());
-//                editor.apply();
-                SharedPrefs.saveString(LoginActivity.this, "access_token", authToken.getAccessToken());
-
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                finish();
-            }
-        });
-
         binding.loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,29 +59,10 @@ public class LoginActivity extends AppCompatActivity {
                 data.setEmail(email);
                 data.setPassword(password);
                 loginViewModel.setLoginModel(data);
-//                RetrofitClient.getInstance().verifyLoginUser(model).enqueue(new Callback<AuthToken>() {
-//                    @Override
-//                    public void onResponse(Call<AuthToken> call, Response<AuthToken> response) {
-//                        Log.d("access", "Hello"+ response.body().getAccessToken());
-//                        if (response.isSuccessful() && response.body() != null){
-//
-//                            SharedPreferences sharedPreferences = getSharedPreferences("onBoardingPrefs", Context.MODE_PRIVATE);
-//                            SharedPreferences.Editor editor = sharedPreferences.edit();
-//                            editor.putString("access_token", response.body().getAccessToken());
-//                            editor.apply();
-//                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-//                            Toast.makeText(LoginActivity.this, response.body().getAccessToken(), Toast.LENGTH_SHORT).show();
-//                        finish();
-//                    }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<AuthToken> call, Throwable t) {
-//
-//                    }
-//                });
+                loginUser();
             }
         });
+
 
         binding.signUpTV.setOnClickListener(view -> {
             startActivity(new Intent(this, SignupActivity.class));
@@ -122,6 +87,24 @@ public class LoginActivity extends AppCompatActivity {
                 binding.passwordET.setSelection(binding.passwordET.getText().length());
             }
         });
-
+    }
+    private void loginUser(){
+        String email = binding.emailET.getText().toString();
+        String password = binding.passwordET.getText().toString();
+        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.emailET.setError("Email is Not Valid");
+        } else if (password.isEmpty() || password.length()<4) {
+            binding.passwordET.setError("Password Not Valid");
+        }else {
+            loginViewModel.accesToken.observe(this, new Observer<AuthToken>() {
+                @Override
+                public void onChanged(AuthToken authToken) {
+                    Log.d("Loggedin", authToken.getAccessToken());
+                    SharedPrefs.saveString(LoginActivity.this, "access_token", authToken.getAccessToken());
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
+                }
+            });
+        }
     }
 }

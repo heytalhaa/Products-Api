@@ -1,40 +1,25 @@
 package com.example.eshopping.ui.mainactivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.eshopping.data.model.CreateUser;
-import com.example.eshopping.data.model.ProductData;
 import com.example.eshopping.R;
-import com.example.eshopping.data.retrofitclient.RetrofitClient;
 import com.example.eshopping.databinding.ActivityMainBinding;
-import com.example.eshopping.ui.detailsactivity.DetailsActivity;
+import com.example.eshopping.ui.mainactivity.adapter.ProductAdapter;
 import com.example.eshopping.ui.mainactivity.auth.AccountFragment;
 import com.example.eshopping.ui.mainactivity.auth.CartFragment;
-import com.example.eshopping.ui.mainactivity.auth.DetailsFragment;
 import com.example.eshopping.ui.mainactivity.auth.HomeFragment;
 import com.example.eshopping.ui.mainactivity.auth.MessagesFragment;
 import com.example.eshopping.utils.SharedPrefs;
 import com.example.eshopping.utils.Utils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.List;
-
-import okhttp3.internal.Util;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;

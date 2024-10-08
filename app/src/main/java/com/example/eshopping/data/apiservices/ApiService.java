@@ -1,5 +1,6 @@
 package com.example.eshopping.data.apiservices;
 
+import com.example.eshopping.data.model.Category;
 import com.example.eshopping.data.model.ProductData;
 import com.example.eshopping.data.model.AuthToken;
 import com.example.eshopping.data.model.CreateUser;
@@ -26,4 +27,10 @@ public interface ApiService {
 
     @GET("api/v1/products/{id}")
     Call<ProductData> getProductDetails(@Path("id") int id);
+
+    @GET("api/v1/categories/")
+    Call<List<Category>> getAllCategory();
+
+    @GET("api/v1/categories/{categories}")
+    Call<List<ProductData>> getProductCategory(@Path("categories") Category category);
 }
